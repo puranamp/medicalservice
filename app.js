@@ -29,10 +29,13 @@ app.get('/items', (req, res) => {
 });
 
 app.post('/items', (req, res) => {
+    // if !valid, dont insert json
     if (validate(req.body)) {
         data.bills.push(req.body);
+        res.send(req.body);
+    } else {
+        res.sendStatus(400); // bad argument
     }
-    res.send(req.body);
 });
 
 app.listen(3000, () => {
